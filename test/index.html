@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./../lib/umd/poll.umd.js"></script>
+</head>
+
+<body>
+    <div id='count'></div>
+    <div id='count2'></div>
+    <script>
+        console.log(window)
+        var createPoll = $poll({
+            time: 1000,
+            arg: 1
+        })
+
+
+        var count = ''
+
+        function write() {
+            var date = new Date()
+            count = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
+            document.querySelector('#count').innerHTML = count
+        }
+
+        function write2(arg) {
+            var date = new Date()
+            count = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
+            document.querySelector('#count2').innerHTML = count + ' 这是参数：' + arg
+        }
+        var time = createPoll.push(write, {
+            number: 10,
+        })
+
+        var time2 = createPoll.push(write2, {
+            arg: 2
+        })
+
+        setTimeout(() => {
+            console.log(createPoll.getPollInfo(time2))
+        }, 5000)
+
+        setTimeout(() => {
+
+            createPoll.remove(time2)
+        }, 15000)
+    </script>
+</body>
+
+</html>
