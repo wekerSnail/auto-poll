@@ -95,10 +95,11 @@ class PollRequest {
     //移除一个轮询
     remove(key) {
         const has = this.queue.get(key)
-        if (!has) return
+        if (!has) return null
         this.queue.delete(key)
         this.configs.delete(key)
         this.recKey.push(key)
+        return null
     }
 
     //重置整个轮询器
